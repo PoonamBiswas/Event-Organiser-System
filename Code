@@ -1,0 +1,78 @@
+package Project;
+import java.util.Scanner;
+
+public class RegistrationModule {
+    private static String[] venueNames = {"Hall A", "Hall B"};
+
+    public void registerEvent(Scanner scanner, boolean[] venueAvailability) {
+        System.out.println("Welcome! Please register a new event.");
+        System.out.print("Enter event name: ");
+        String eventName = scanner.nextLine();
+
+        // Display available venues
+        System.out.println("Available Venues:");
+        for (int i = 0; i < venueNames.length; i++) {
+            if (venueAvailability[i]) {
+                System.out.println((i + 1) + ". " + venueNames[i]);
+            }
+        }
+
+        // Prompt user to select venue
+        int venueSelection = 0;
+        do {
+            System.out.print("Select venue (1-" + venueNames.length + "): ");
+            venueSelection = scanner.nextInt();
+            scanner.nextLine(); // consume newline character
+        } while (venueSelection < 1 || venueSelection > venueNames.length || !venueAvailability[venueSelection - 1]);
+
+        // Book selected venue
+        venueAvailability[venueSelection - 1] = false;
+
+        // Display confirmation message
+        System.out.println("Registration complete. Event \"" + eventName + "\" has been booked at " + venueNames[venueSelection - 1] + ".");
+    }
+}
+
+package Project;
+
+import java.util.Scanner;
+
+public class OrganizerLogin {
+    private static String[] organizerUsernames = {"organizer1", "organizer2"};
+    private static String[] organizerPasswords = {"password1", "password2"};
+    private static boolean[] venueAvailability = {true, true};
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Organizer Login!");
+
+        // Get login credentials
+        System.out.print("Username: ");
+        String username = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
+        // Validate credentials
+        boolean credentialsValid = false;
+        for (int i = 0; i < organizerUsernames.length; i++) {
+            if (organizerUsernames[i].equals(username) && organizerPasswords[i].equals(password)) {
+                credentialsValid = true;
+                break;
+            }
+        }
+
+        // Display appropriate message based on validity of credentials
+        if (credentialsValid) {
+            System.out.println("Login successful!");
+         
+            // Create new RegistrationModule instance
+            RegistrationModule registrationModule = new RegistrationModule();
+
+            // Call registration module
+            registrationModule.registerEvent(scanner, venueAvailability);
+
+        } else {
+            System.out.println("Incorrect username or password. Please try again.");
+        }
+    }
+}
+
