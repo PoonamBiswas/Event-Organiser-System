@@ -1,2 +1,7 @@
 # Event-Organiser-System
 A Java Program that will ask the user for login id and password. With the correct credentials user will be able to register themselves to organize an event as per the availability of Venue.
+3.	About the Code:
+The code is a basic Java program that simulates a login and registration module for an event organizer. It consists of two classes: `OrganizerLogin` and `RegistrationModule`.
+The `OrganizerLogin` class handles the login module. It prompts the user for their username and password and validates their credentials against a hard-coded list of valid usernames and passwords. If the credentials are valid, it creates a new instance of the `RegistrationModule` class and calls its `registerEvent` method. If the credentials are invalid, it displays an error message and prompts the user to try again.
+The `RegistrationModule` class handles the registration module. It prompts the organizer to register a new event by entering the event name and selecting a venue. The available venues (in this case, Hall A and Hall B) are displayed, and the organizer selects a venue by entering a number corresponding to the venue. Once a venue is selected, the program books the venue and displays a confirmation message.
+This program uses a simple array to track the availability of each venue (`venueAvailability`), with each index in the array representing a different venue. The availability of a venue is set to `true` if it is available, and `false` if it is booked.
